@@ -44,4 +44,38 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 }]]]></db:input-parameters>
 		</db:delete>
 	</sub-flow>
+	<sub-flow name="updateAll-PUT-Sub_Flow" doc:id="63983305-3204-411d-885f-bac4f45cdcf9" >
+		<db:update doc:name="Update" doc:id="1ab5b32b-302b-47bd-b0ff-b79789eb56da" config-ref="Database_Config">
+			<db:sql ><![CDATA[update employee set 
+empid = :empid, first_name = :first_name, last_name = :last_name, email_id = :email_id, mobile = :mobile, address = :address, domain = :address
+where empid = :empid]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	empid : payload.EmpId,
+	first_name : payload.First_Name,
+	last_name : payload.Last_Name,
+	email_id : payload.Email_Id,
+	mobile : payload.Mobile,
+	address : payload.address,
+	domain : payload.domain
+	
+}]]]></db:input-parameters>
+		</db:update>
+	</sub-flow>
+	<sub-flow name="updatePartial-PATCH-Sub_Flow" doc:id="04fe8a32-e81d-4a39-82a6-17cf88fa080b" >
+		<db:update doc:name="Update" doc:id="5fa51c31-1ab6-4385-9089-74bb09864b31" config-ref="Database_Config">
+			<db:sql ><![CDATA[update employee set 
+first_name = :first_name, last_name = :last_name, email_id = :email_id, mobile = :mobile, address = :address, domain = :address
+where empid = :empid]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	empid : payload.EmpId,
+	first_name : payload.First_Name,
+	last_name : payload.Last_Name,
+	email_id : payload.Email_Id,
+	mobile : payload.Mobile,
+	address : payload.address,
+	domain : payload.domain
+	
+}]]]></db:input-parameters>
+		</db:update>
+	</sub-flow>
 </mule>
